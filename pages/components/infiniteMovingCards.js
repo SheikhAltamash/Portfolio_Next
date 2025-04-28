@@ -96,7 +96,7 @@ export const InfiniteMovingCards = ({
             // Removed card-specific styles (background, padding, border)
             // Added flex centering and defined a base width/height - adjust as needed!
             className={cn(
-              "relative flex h-16 w-32 shrink-0 items-center justify-center", // Example size: h-16 w-32. Adjust!
+              "li_infine relative flex h-16 w-32 shrink-0 items-center justify-center", // Example size: h-16 w-32. Adjust!
               itemClassName // Allow external override/addition of classes per item
             )}
             // Use a combination of src and index for a more robust key, or just index if src might not be unique

@@ -1,4 +1,76 @@
-.meteros {
-  background-color: antiquewhite !important;
-  margin: auto !important;
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Pushes left and right nav apart */
+  align-items: center; /* Vertically aligns items */
+  padding: 1rem 2rem; /* Add some padding */
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width calculation */
+  position: relative; /* Needed if you add glassmorphism later */
+  z-index: 10; /* Keep navbar on top */
 }
+
+.left_nav h2 {
+  margin: 0; /* Remove default margin */
+  color: #ffffff; /* White text color */
+  font-size: 1.5rem; /* Adjust size as needed */
+}
+
+.right_nav {
+  display: flex;
+  align-items: center; /* Align links and button */
+  gap: 2rem; /* Space between links container and button */
+}
+
+.right_nav .links { /* Container for just the links */
+  display: flex;
+  gap: 1.5rem; /* Space between individual links */
+}
+
+/* --- Underline Animation --- */
+.nav-link-wrapper {
+  position: relative; /* Crucial for positioning the pseudo-element */
+  display: inline-block; /* Allows positioning and respects margins */
+  padding: 0.5rem 0; /* Add some vertical padding if needed */
+}
+
+.nav-link-wrapper a {
+  text-decoration: none;
+  color: #cccccc; /* Lighter grey for inactive links */
+  cursor: pointer;
+  transition: color 0.3s ease; /* Smooth color transition */
+  padding-bottom: 5px; /* Add space below text for underline */
+}
+
+.nav-link-wrapper a:hover {
+  color: #ffffff; /* Brighter white on hover */
+}
+
+/* The underline pseudo-element */
+.nav-link-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 0; /* Start with zero width */
+  height: 2px; /* Underline thickness */
+  bottom: 0; /* Position at the bottom of the wrapper */
+  left: 0; /* Start from the left */
+  background-color: #00ffff; /* Your cyan color */
+  transition: width 0.3s ease-in-out; /* Animate the width change */
+}
+
+/* On hover of the wrapper, expand the underline */
+.nav-link-wrapper:hover::after {
+  width: 100%; /* Expand to full width */
+}
+/* --- End Underline Animation --- */
+
+
+/* Optional: Adjust button container margin if needed (Tailwind is handling it now) */
+/* .right_nav .button-container { */
+  /* margin-left: 2rem;  */
+/* } */
+
+/* Styling for the button provided by HoverBorderGradient might override this, */
+/* but you can add base button styles here if needed */
+/* .download-button { ... } */

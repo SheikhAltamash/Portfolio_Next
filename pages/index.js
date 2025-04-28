@@ -1,19 +1,19 @@
 // import { Meteors } from "./components/meteors";
 import { InfiniteMovingCards } from "./components/infiniteMovingCards";
-import Name from "./name";
+import Name from "./ui/name";
 import AllProjects from "./components/allProjects";
 import { LampContainer } from "./components/lamp";
 import { motion } from "motion/react";
 import { FloatingDock } from "./components/floatingicons";
 import {
   IconBrandGithub,
-  IconBrandX,
-  IconExchange,
-  IconHome,
-  IconNewSection,
-  IconTerminal2,
+  IconBrandLinkedin,
+  IconBrandInstagram,
+  IconBrandWhatsapp,
+  IconMail,
 } from "@tabler/icons-react";
-import Navbar from "./navbar";
+import Navbar from "./ui/navbar";
+// import ScrollIndicatorArrow from "./components/ScrollDownIndicator";
 const testimonials = [
   { src: "/logos/css.png", alt: "Google Logo" },
   { src: "/logos/react.png", alt: "Microsoft Logo" },
@@ -31,58 +31,36 @@ const testimonials = [
 ];
 const links = [
   {
-    title: "Home",
+    title: "Mail",
     icon: (
       // Replaced text-neutral-500 dark:text-neutral-300 with text-blue-400
-      <IconHome className="h-full w-full text-blue-400" />
+      <IconMail className="h-full w-full text-blue-400" />
     ),
-    href: "#",
+    href: "mailto:altamashsheikh077@gmail.com",
   },
   {
-    title: "Products",
+    title: "Linkedin",
     icon: (
       // Replaced text-neutral-500 dark:text-neutral-300 with text-blue-400
-      <IconTerminal2 className="h-full w-full text-blue-400" />
+      <IconBrandLinkedin className="h-full w-full text-blue-400" />
     ),
-    href: "#",
+    href: "https://www.linkedin.com/in/sheikhaltamash",
   },
   {
-    title: "Components",
+    title: "Instagram",
     icon: (
       // Replaced text-neutral-500 dark:text-neutral-300 with text-blue-400
-      <IconNewSection className="h-full w-full text-blue-400" />
+      <IconBrandInstagram className="h-full w-full text-blue-400" />
     ),
-    href: "#",
+    href: "https://www.instagram.com/test_spys/?next=%2F",
   },
   {
-    title: "Aceternity UI",
-    // This uses an img tag, so no text color class to change here
-    icon: (
-      <img
-        src="https://assets.aceternity.com/logo-dark.png"
-        width={20}
-        height={20}
-        alt="Aceternity Logo"
-        // If you wanted to apply a filter or border color, you'd add classes here
-      />
-    ),
-    href: "#",
-  },
-  {
-    title: "Changelog",
+    title: "WhatsAap",
     icon: (
       // Replaced text-neutral-500 dark:text-neutral-300 with text-blue-400
-      <IconExchange className="h-full w-full text-blue-400" />
+      <IconBrandWhatsapp className="h-full w-full text-blue-400" />
     ),
-    href: "#",
-  },
-  {
-    title: "Twitter",
-    icon: (
-      // Replaced text-neutral-500 dark:text-neutral-300 with text-blue-400
-      <IconBrandX className="h-full w-full text-blue-400" />
-    ),
-    href: "#",
+    href: "https://wa.me/7498399449",
   },
   {
     title: "GitHub",
@@ -90,15 +68,15 @@ const links = [
       // Replaced text-neutral-500 dark:text-neutral-300 with text-blue-400
       <IconBrandGithub className="h-full w-full text-blue-400" />
     ),
-    href: "#",
+    href: "https://github.com/SheikhAltamash",
   },
 ];
 export default function Home() {
   return (
     <>
       <Navbar></Navbar>
-      <div className="lam">
-        <LampContainer>
+      <div className="lamp_div">
+        <LampContainer >
           <motion.div
             initial={{ opacity: 0.5, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +90,7 @@ export default function Home() {
             Sheikh Altamash
             <Name className="typename"></Name>
             <h3 className="afternameh3 ">
-              Passionate Computer Science student crafting dynamic and <br />
+              Passionate Computer Science student crafting dynamic and <br className="noBreak"/>
               user-friendly web applications.
             </h3>{" "}
             <div className="floating_deck flex items-center justify-center h-[35rem] w-full">
@@ -121,6 +99,11 @@ export default function Home() {
           </motion.div>
         </LampContainer>
       </div>
+      <div className="view_touch">
+        <a>View Project</a>
+        <a>Get In Touch</a>
+      </div>
+      {/* <ScrollIndicatorArrow/> */}
       <div className="afternav">
         {/* <AllProjects></AllProjects> */}
         <div className=" infite h-[20rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">

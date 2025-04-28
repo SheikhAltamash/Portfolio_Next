@@ -1,5 +1,5 @@
-import { useState,useEffect } from "react";
-import { TypewriterEffect } from "./components/typeWritterText";
+import { useState, useEffect } from "react";
+import { TypewriterEffect } from "../components/typeWritterText";
 export default function Name() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -62,7 +62,6 @@ export default function Name() {
   }, []);
   return (
     <div className="top_type">
-     
       <div className=" typediv flex flex-col items-center justify-center h-[40rem]  ">
         <TypewriterEffect
           className="typeWritter"
