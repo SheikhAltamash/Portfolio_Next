@@ -1,7 +1,6 @@
 // import { Meteors } from "./components/meteors";
 import { InfiniteMovingCards } from "./components/infiniteMovingCards";
 import Name from "./ui/name";
-import AllProjects from "./components/allProjects";
 import { LampContainer } from "./components/lamp";
 import { motion } from "motion/react";
 import { FloatingDock } from "./components/floatingicons";
@@ -13,7 +12,14 @@ import {
   IconMail,
 } from "@tabler/icons-react";
 import Navbar from "./ui/navbar";
-// import ScrollIndicatorArrow from "./components/ScrollDownIndicator";
+import ScrollIndicatorArrow from "./components/ScrollDownIndicator";
+import About from "./ui/about";
+import { TextAnimate } from "./components/TextAnimate";
+import { SmoothCursor } from "./components/smothCursor";
+import { ScrollProgress } from "./components/scrollBarProgress";
+import { ContainerScroll } from "./components/ContainerScroll";
+import Projects from "./ui/projects";
+import { TimelineDemo } from "./ui/education";
 const testimonials = [
   { src: "/logos/css.png", alt: "Google Logo" },
   { src: "/logos/react.png", alt: "Microsoft Logo" },
@@ -75,8 +81,10 @@ export default function Home() {
   return (
     <>
       <Navbar></Navbar>
+      <ScrollProgress></ScrollProgress>
+      {/* <SmoothCursor></SmoothCursor> */}
       <div className="lamp_div">
-        <LampContainer >
+        <LampContainer>
           <motion.div
             initial={{ opacity: 0.5, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +98,8 @@ export default function Home() {
             Sheikh Altamash
             <Name className="typename"></Name>
             <h3 className="afternameh3 ">
-              Passionate Computer Science student crafting dynamic and <br className="noBreak"/>
+              Passionate Computer Science student crafting dynamic and{" "}
+              <br className="noBreak" />
               user-friendly web applications.
             </h3>{" "}
             <div className="floating_deck flex items-center justify-center h-[35rem] w-full">
@@ -103,9 +112,14 @@ export default function Home() {
         <a>View Project</a>
         <a>Get In Touch</a>
       </div>
-      {/* <ScrollIndicatorArrow/> */}
+      <ScrollIndicatorArrow />
+      <About></About>
+
       <div className="afternav">
-        {/* <AllProjects></AllProjects> */}
+        <div className="top_About_h2 ">
+          <h2>Skills</h2>
+          <div className="underline_aboutME"></div>
+        </div>
         <div className=" infite h-[20rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
           <InfiniteMovingCards
             items={testimonials}
@@ -114,15 +128,16 @@ export default function Home() {
             className="infit"
           />
         </div>
-        <div className="infite h-[20rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+        <div className="infite botttom h-[20rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
           <InfiniteMovingCards
             items={testimonials}
             direction="left"
             speed="fast"
           />
         </div>{" "}
-        {/* <Meteors className="meteor" /> */}{" "}
       </div>
+      <Projects></Projects>
+      <TimelineDemo></TimelineDemo>
     </>
   );
 }

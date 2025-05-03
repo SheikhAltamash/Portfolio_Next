@@ -114,7 +114,7 @@ function IconContainer({ mouseX, title, icon, href }) {
         style={{ width, height }} // Apply animated width and height
         onMouseEnter={() => setHovered(true)} // Show tooltip on hover
         onMouseLeave={() => setHovered(false)} // Hide tooltip when hover ends
-        className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 hover:bg-gray-300 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+        className="icon_float relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 hover:bg-gray-300 dark:bg-neutral-800 dark:hover:bg-neutral-700"
       >
         {/* Tooltip displayed above the icon on hover */}
         <AnimatePresence>
@@ -132,7 +132,7 @@ function IconContainer({ mouseX, title, icon, href }) {
         {/* The inner div containing the actual icon, also animated */}
         <motion.div
           style={{ width: widthIcon, height: heightIcon }} // Apply animated icon size
-          className="flex items-center justify-center"
+          className=" flex items-center justify-center"
         >
           {icon} {/* Render the icon passed via props */}
         </motion.div>

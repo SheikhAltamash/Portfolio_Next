@@ -1,89 +1,94 @@
 "use client";
-import React, { useState, useEffect } from "react";
 
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import * as React from "react";
+import PropTypes from "prop-types"; // Import PropTypes
+import { cn } from "@/lib/utils"; // Ensure this path is correct
 
-export function HoverBorderGradient({
-  children,
-  containerClassName,
+// Interface ShineBorderProps removed
+
+/**
+ * Shine Border
+ *
+ * An animated background border effect component with configurable properties.
+ * Renders a div element with animated radial gradient background masked to appear as a border.
+ */
+export function ShineBorder({
+  borderWidth = 1,
+  duration = 14,
+  shineColor = "#000000",
   className,
-  as: Tag = "button",
-  duration = 1,
-  clockwise = true,
-  ...props
+  style,
+  ...props // Collect remaining props like id, data-*, etc.
+  // Removed type annotation: ShineBorderProps
 }) {
-  const [hovered, setHovered] = useState(false);
-  const [direction, setDirection] = useState("TOP");
-
-  const rotateDirection = (currentDirection) => {
-    const directions = ["TOP", "LEFT", "BOTTOM", "RIGHT"];
-    const currentIndex = directions.indexOf(currentDirection);
-    const nextIndex = clockwise
-      ? (currentIndex - 1 + directions.length) % directions.length
-      : (currentIndex + 1) % directions.length;
-    return directions[nextIndex];
-  };
-
-  const movingMap = {
-    TOP: "radial-gradient(20.7% 50% at 50% 0%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    LEFT: "radial-gradient(16.6% 43.1% at 0% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    BOTTOM:
-      "radial-gradient(20.7% 50% at 50% 100%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    RIGHT:
-      "radial-gradient(16.2% 41.199999999999996% at 100% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-  };
-
-  const highlight =
-    "radial-gradient(75% 181.15942028985506% at 50% 50%, #3275F8 0%, rgba(255, 255, 255, 0) 100%)";
-
-  useEffect(() => {
-    if (!hovered) {
-      const interval = setInterval(() => {
-        setDirection((prevState) => rotateDirection(prevState));
-      }, duration * 1000);
-      return () => clearInterval(interval);
-    }
-  }, [hovered]);
   return (
-    <Tag
-      onMouseEnter={(event) => {
-        setHovered(true);
+    <div
+      style={{
+        // Set CSS custom properties for dynamic values
+        "--border-width": `${borderWidth}px`,
+        "--duration": `${duration}s`,
+        // Define the radial gradient background using the shineColor(s)
+        backgroundImage: `radial-gradient(transparent, transparent, ${
+          Array.isArray(shineColor) ? shineColor.join(",") : shineColor // Handle single or multiple colors
+        }, transparent, transparent)`,
+        backgroundSize: "300% 300%", // Make background larger than the element for animation
+        // Masking to create the border effect:
+        // 1. Mask out the content area (content-box)
+        // 2. Use a second mask layer covering the whole element
+        mask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+        // Webkit prefix for wider browser compatibility
+        WebkitMask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+        // Composite operation: Exclude the content area mask from the full mask, leaving only the border area
+        WebkitMaskComposite: "xor", // For Webkit browsers
+        maskComposite: "exclude", // Standard property
+        // Padding equal to the border width makes the mask work correctly
+        padding: "var(--border-width)",
+        // Spread any additional custom styles
+        ...style,
+        // No need for 'as React.CSSProperties' assertion in JS
       }}
-      onMouseLeave={() => setHovered(false)}
       className={cn(
-        "relative flex rounded-full border  content-center bg-black/20 hover:bg-black/10 transition duration-500 dark:bg-white/20 items-center flex-col flex-nowrap gap-10 h-min justify-center overflow-visible p-px decoration-clone w-fit",
-        containerClassName
+        // Base styles
+        "pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]",
+        // Apply animation class (assuming 'animate-shine' is defined in your CSS/Tailwind config)
+        "motion-safe:animate-shine",
+        // Apply custom className if provided
+        className
       )}
+      // Spread remaining props onto the div element
       {...props}
-    >
-      <div
-        className={cn(
-          "w-auto text-white z-10 bg-black px-4 py-2 rounded-[inherit]",
-          className
-        )}
-      >
-        {children}
-      </div>
-      <motion.div
-        className={cn(
-          "flex-none inset-0 overflow-hidden absolute z-0 rounded-[inherit]"
-        )}
-        style={{
-          filter: "blur(2px)",
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-        }}
-        initial={{ background: movingMap[direction] }}
-        animate={{
-          background: hovered
-            ? [movingMap[direction], highlight]
-            : movingMap[direction],
-        }}
-        transition={{ ease: "linear", duration: duration ?? 1 }}
-      />
-      <div className="bg-black absolute z-1 flex-none inset-[2px] rounded-[100px]" />
-    </Tag>
+    />
   );
 }
+
+// Define PropTypes for runtime type checking and documentation
+ShineBorder.propTypes = {
+  /**
+   * Width of the border in pixels.
+   * @default 1
+   */
+  borderWidth: PropTypes.number,
+  /**
+   * Duration of the background position animation cycle in seconds.
+   * @default 14
+   */
+  duration: PropTypes.number,
+  /**
+   * Color(s) for the radial gradient. Can be a single CSS color string
+   * or an array of color strings to create multi-color gradients.
+   * @default "#000000"
+   */
+  shineColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
+  /**
+   * Additional CSS class names to apply to the div element.
+   */
+  className: PropTypes.string,
+  /**
+   * Additional CSS styles to apply to the div element.
+   */
+  style: PropTypes.object,
+  // Implicitly accepts other standard HTML div attributes via ...props
+};

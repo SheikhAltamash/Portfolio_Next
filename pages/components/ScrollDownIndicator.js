@@ -25,7 +25,7 @@ const ScrollIndicatorArrow = ({
         className // Allows overriding/adding styles via props
       )}
     >
-      <IconArrowDown size={28} /> {/* Adjust size as needed */}
+      <IconArrowDown size={40} /> {/* Adjust size as needed */}
       {/* <span className="sr-only">{ariaLabel}</span> */}
     </a>
   );
